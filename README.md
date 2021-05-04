@@ -1,0 +1,2 @@
+# gotalks
+Talks about golang
