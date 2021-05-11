@@ -5,17 +5,6 @@ Olivier Roux
 Go and Python developer
 olivier.roux@deepki.com
 
-## About me
-
-Learned Python in 1999 and Go in 2016.
-
-Used Python full-time for about 7 years.
-
-Used Go full time for more than 4 years.
-
-Python and Go are my two favorite languages. I always miss one when I use the other.
-
-
 ## Foreword
 
 Throughout this talk, we'll be talking about Go 1.x and Python 3.x
@@ -29,62 +18,45 @@ Throughout this talk, we'll be talking about Go 1.x and Python 3.x
 
 - It will make you more desirable on the market.
 
-- A larger toolset makes you a better developer.
+
+## What is Go?
+
+Open source programming language designed at Google by pioneers of computer science.
+
+- Ken Thompson (Unix, B, grep, Plan 9, UTF-8)
+- Rob Pike (Plan 9, UTF-8)
+- Robert Griesemer (JavaScript V8 engine)
 
 
 ## Why Go?
 
-The Hacker Earth 2020 survey showed that among students (29%) and experienced developers (32%),
-Go has emerged as the clear winner for the most sought-after programming language.
+In 2020, Go was the most sought-after programming language.
 
 .image img/sought-after.png
 
 
 ## Why is it so popular?
 
-- Easy to learn and easy to master.
+- Easy to learn *and* easy to master.
 
 - Statically typed, but with a dynamic feel.
   
-- Standing on the shoulders of giants
-
-  The creators of Go (Robert Griesemer, Rob Pike, and Ken Thompson) are pioneers of modern Computer Science.
-
 - Language-level concurrency features.
 
-- Expansive "batteries included" standard library.
+- Compiled to machine code.
 
-- Unlike Python, Go is compiled to machine code. This makes it *a lot* faster.
-  
-- The compilation is so fast that it feels like an interpreted language.
+- The compilation is so fast, it feels like an interpreted language.
+
+- Expansive "batteries included" standard library.
 
 - Great tools.
 
 
-## Where is Go being used?
+## What is it good for?
 
-- DevOps
+- Backend servers (aka cloud applications)
 
-  Kubernetes and Docker are written in Go.
-
-- Distributed services
-
-  Because of native concurrency, Go is well suited for creating APIs, web servers, and microservices.
-
-- General Backend infrastructure
-
-  Go speed, simplicity, and memory safety has made it a popular choice as a backend language.
-
-  Many organizations are rewriting their existing infrastructure in Go.
-
-
-## The most useful slide of this presentation
-
-"go" as a search keyword is completely useless.
-
-Use "golang" instead, you'll find what you're looking for.
-
-You're welcome.
+- Tools (docker, kubernetes)
 
 
 ## Hello, world!
@@ -95,18 +67,12 @@ As you can see, the syntax is very simple and clean.
 
 Unlike Python, code *must* be in a `main` function if we want to produce an executable.
 
-Go uses `camelCase` for everything.
-
-Capitalized names are exported. The other names are private.
-
 
 ## Static typing
 
-Python is dynamically typed. Any variable can change type at any point.
-
 Go is statically typed. Once a type has been assigned to a variable, it can not be changed.
 
-Most runtime errors in python would be detected as compilation errors in Go.
+Many runtime errors in python would be detected as compilation errors in Go.
 
 
 ## Type declaration
@@ -114,73 +80,43 @@ Most runtime errors in python would be detected as compilation errors in Go.
 .play variables/main.go
 
 
-## Style
-
-Like Python, Go tries to force developers to write beautiful code.
-
-It goes even further.
-
-- Unused variables will throw compilation errors
-
-- Unused imports will throw compilation errors.
-
-- Code that does not look like what gofmt produces will not compile.
-  
-  Most people have a love/hate relationship with gofmt.
-
-
 ## Data types
 
 - Ten types of integers, but you mostly use `int`, which is the same as Python's.
-  - `int8`, `int16`, `int32`, `int64`
-  - `uint8`, `uint16`, `uint32`, `uint64`
-  - `int` and `uint` are either 32 or 64 bits depending on the target architecture.
 
-- Floats are either `float32` or `float64`. Python's floats are 64 bits.
+- Two types of floats: `float32` and `float64`.
 
-- Strings are immutable and UTF-8 encoded, same as Python.
-
-- Booleans are called `true` and `false`
+- Strings are immutable and UTF-8 encoded (same as Python).
+  
+- Strings are made of `runes`.
 
 - Go's `nil` is a value. Python's `None` has its own type.
-
-- Go has constants. Python doesn't.
 
 
 ## Collections
 
-- Slices can be used like Python's lists.
-
-  Each element has to be of the same type.
+- Slices can be used like Python's lists. They can grow.
 
 - Maps can be used like Python's dictionaries.
 
-  The type of the keys and the type of the values has to be the same for each entry.
+- No sets.
 
-- No sets, but maps with empty values can achieve the same effect.
-
-- No tuples
-
-- Nothing fancy like OrderedDict in the standard library
+- No tuples.
 
 
 ## Structs
 
-A struct is a mutable collection of fields.
+Similar to Python's classes:
 
-You can attach methods to them.
+- User-defined data types.
 
-They are user-defined data types.
+- Collection of fields.
 
-They are similar to Python's classes without the inheritance.
+- Can have methods attached to them.
 
-Go is not object-oriented.
-Instead, Go uses composition to achieve a very similar effect.
+No inheritance. Instead, Go uses *composition* to achieve a very similar effect.
 
-Inheritance = "is a". Composition = "has a".
-
-Methods are written like regular functions with a special "receiver" argument.
-There is no "class" block.
+(Inheritance = "is a". Composition = "has a").
 
 
 ## Structs
@@ -190,15 +126,13 @@ There is no "class" block.
 
 ## Pointers
 
-They don't exist in Python.
-
 Go pointers work just like C pointers, but safe (no arithmetics allowed).
 
-In Python, arguments are passed by reference.
+- In Python, arguments passed to function can sometimes be changed.
 
-In Go, arguments are passed by value.
+- In Go, arguments passed to function can never be changed.
 
-Pointers are a way for a function to modify the content of the arguments it received.
+- Arguments can be pointers, which let functions access the underlying memory used by a variable.
 
 
 ## Pointers
@@ -208,18 +142,15 @@ Pointers are a way for a function to modify the content of the arguments it rece
 
 ## Errors
 
-Go does not have exceptions.
+Go proverb: "Errors are values".
 
-In Go, errors are explicitely returned by some functions.
+Functions return errors the same way tey return any other values.
 
-Go errors are annoying at first, but once you get used to them
-they are *a lot* easier to work with than exceptions.
+Can be annoying at first.
 
-Because errors are explicit, the way a function behaves is easier to predict
-and you never feel the need to "except everything".
-
-Being forced to deal with the errors instead of letting exceptions propagate
-also means that your code won't crash unless you explicitely let it.
+- Behavior is obvious and predictable.
+- No more `except Exception` anti-pattern.
+- Your program won't crash unless you explicitly let it.
 
 
 ## Errors
@@ -229,33 +160,42 @@ also means that your code won't crash unless you explicitely let it.
 
 ## Interfaces
 
-Python has duck-tying: if it looks like a duck and quacks like a duck, it's a duck.
+- Same idea as "duck-tying", but explicit.
 
-In practice, it's difficult to agree on what a duck is.
+- Similar to Python's Abstract Base Classes (abc).
 
-Go has formally defined behaviors called interfaces. They are abstract types.
+- Just a list of methods (don't care about data).
 
-They are just a list of methods. They don't care about data.
+Go proverb: "The bigger the interface, the weaker the abstraction".
 
 Concrete types implement interfaces just by having the right methods.
 No knowledge of the interface is necessary.
 
-Interfaces will emerge from implementation patterns.
+-> Interfaces can emerge from implementation patterns.
 
-They're a great tool for mocking.
+
+## Interfaces 1/3
+
+.code interface/hero/hero.go
+
+
+## Interfaces 2/3
+
+.code interface/baby/baby.go
+
+
+## Interfaces 3/3
+
+.play interface/main.go
 
 
 ## Goroutines
 
-Called coroutines in every other language, including Python's asyncio.
+Similar to asyncio's coroutines, but not limited to I/O.
 
-They feel like threads in the sense that they can share memory.
+Can share memory.
 
-Unlike threads, they are very lightweight. Switching context is very cheap.
-
-It is not uncommon for a single program to use thousands of them at the same time.
-
-Unlike Python's asyncio, they can be used to optimize CPU bound algorithms as well.
+Very lightweight.
 
 
 ## Goroutines
@@ -265,15 +205,11 @@ Unlike Python's asyncio, they can be used to optimize CPU bound algorithms as we
 
 ## Channels
 
-Functions called as goroutines can not return values, but they can share data.
+Queue-like objects.
 
-Channels are queue-like objects that let us do just that without worrying about concurrent access.
+Code execution stops on a channel `read` until someone writes into it.
 
-Code execution stops on a channel read until someone writes into it.
-
-Code execution stops on a channel write until someone is ready to read from it.
-
-Channels are a way to synchronize goroutines.
+Code execution stops on a channel `write` until someone reads from it.
 
 
 ## Channels
@@ -294,80 +230,37 @@ Channels are a way to synchronize goroutines.
 
 .code zen.txt
 
+
 ## Zen is good
 
-This is a nice list.
+This is a nice list!
 
-I agree with most of it.
-
-(Although it seems that Python doesn't, sometimes)
-
-
-## Go is Zen
-
-Go meets nearly all of Tim Peters' criteria (maybe not that one about being Dutch).
-
-Often more than Python itself.
-
-Let's take a look at some of them.
+Go is Zen... often more than Python itself.
 
 
 ## Beautiful is better than ugly
 
-Go has a lightweight, regular syntax reminiscent of C. It's very familiar for most people.
+Go has a lightweight, regular syntax reminiscent of C.
 
-The way `gofmt` enforces style makes go code consistent across code bases.
-
-More so than Python's indentation.
-
-But beauty is in the eye of the beholder, so let's move on.
+It's very familiar for most developers.
 
 
 ## Simple is better than complex
 
-Go only has 25 reserved keywords, Python has 33.
-
-They're both cheating with globals though. :)
-
-But in general, Go just has less of everything.
-
-
-## Simple is better than complex
-
-Methods are just functions.
-
-They can be declared on any type. No need for classes.
-
-.code zen/method.go
-
-
-## Simple is better than complex
-
-No constructors or destructors
-
-A constructor is just a funtion
-
-.code zen/constructor.go
-
-
-## Simple is better than complex
-
+- No class blocks (methods are just functions).
+- No magic methods.
 - No inheritance.
-- No decorators.
-- No named or optional arguments.
-- No list comprehension.
+- No special decorator syntax.
+- No named/optional arguments.
 - No generators.
-- No exceptions.
 
 
 ## Explicit is better than implicit
 
 - Explicit error handling.
-- Explicit dependencies.
-- No implicit numeric conversion.
-- Structs properties order define memory layout (no hidden cost).
 - Explicit definition of abstractions through interfaces.
 - Explicit export of names through naming (capitalized means exported).
+- Actual constants.
 
 
 ## Flat is better than nested
@@ -379,11 +272,9 @@ A constructor is just a funtion
 
 ## Flat is better than nested
 
-- Methods are not nested inside classes.
-
-- Package name space is flat.
-
 - Multiple files that comprise one package share one name space.
+
+- No sub-modules.
 
 
 ## Sparse is better than dense
@@ -393,37 +284,22 @@ Go syntax does not encourage crazy one-liners
 - No list comprehension.
 - No ternary operator.
 
-When reading Go code the control flow is obvious.
+Go proverb: "Clear is better than clever".
 
 
 ## Readability counts
 
-Go was designed at Google for teams of hundreds/thousands of programmers.
-
-Readability is of paramount importance.
-
 - The gofmt tool enforces "one true style" (No more stupid arguments).
 
-- Type inference saves a lot of typing, but not at the cost of readability.
-  
-- Many other language design decisions were made in the name of readability
+  Proverb: "Gofmt's style is no one's favorite, yet gofmt is everyone's favorite".
+
+- Many language design decisions were made in the name of readability.
+
 
 
 ## There should be one obvious way to do it
 
-I would argue that this is more true of Go than Python.
-
-
-## Go has proverbs!
-
-- Don't communicate by sharing memory, share memory by communicating.
-- The bigger the interface, the weaker the abstraction.
-- Gofmt's style is no one's favorite, yet gofmt is everyone's favorite.
-- A little copying is better than a little dependency.
-- Clear is better than clever.
-- Design the architecture, name the components, document the details.
-
-etc.
+Because of its simplicity, the "right way to do things" in go is often the only way to do things.
 
 
 ## Now is better than never
@@ -438,4 +314,6 @@ Start with [A Tour of Go](https://tour.golang.org) (half a day)
 
 Then read [Effective Go](https://golang.org/doc/effective_go) (half a day)
 
-And check out [Go by example](https://gobyexample.com)
+[Go by example](https://gobyexample.com)
+
+[Awesome Go](https://github.com/avelino/awesome-go)

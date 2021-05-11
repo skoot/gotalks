@@ -5,10 +5,10 @@ import "fmt"
 func repeat(s string, n int) chan string {
 	c := make(chan string)
 	go func() {
-		defer close(c)
 		for i := 0; i < n; i++ {
 			c <- s
 		}
+		close(c)
 	}()
 	return c
 }

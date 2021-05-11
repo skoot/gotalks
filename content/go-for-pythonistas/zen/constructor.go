@@ -6,7 +6,7 @@ type Database struct {
 	client *rpc.Client
 }
 
-func NewClient(addr string) (*Database, error) {
+func NewDatabase(addr string) (*Database, error) {
 	client, err := rpc.Dial("tcp", addr)
 	if err != nil {
 		return nil, err
